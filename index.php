@@ -107,7 +107,6 @@ $neighborhoods = array_values(array_unique(array_filter(array_column($homes, 'ne
 sort($neighborhoods);
 $notice = $_SESSION['favorite_notice'] ?? '';
 unset($_SESSION['favorite_notice']);
-$moveIn = date('Y-m', strtotime('first day of next month'));
 
 function icon($name) {
     $paths = [
@@ -167,6 +166,7 @@ function icon($name) {
         h1 span, h1 em { display:block; width:max-content; max-width:100%; }
         h1 em { font-weight:400; color:var(--red); letter-spacing:-4.8px; }
         .home-search { display:grid; grid-template-columns:250px 228px 226px 196px; width:900px; max-width:100%; min-height:74px; margin:76px 0 0 16px; background:white; box-shadow:0 8px 22px #3a2d201f; }
+        .search-more { display:inline-block; margin:14px 0 0 16px; color:var(--red); font-size:14px; font-weight:700; text-decoration:underline; text-underline-offset:3px; }
         .search-field { position:relative; padding:15px 22px 13px; min-width:0; }
         .search-field + .search-field::before { content:''; position:absolute; top:15px; bottom:15px; left:0; width:1px; background:#e1e1e1; }
         .search-field label { display:block; color:var(--muted); font-size:12px; font-weight:900; letter-spacing:1.1px; text-transform:uppercase; margin-bottom:5px; }
@@ -374,7 +374,7 @@ function icon($name) {
                         <?php for ($i = 1; $i <= 24; $i++) {
                             $month = strtotime('first day of +' . $i . ' month');
                             $value = date('Y-m', $month); ?>
-                            <option value="<?= $value ?>" <?= $value === $moveIn ? 'selected' : '' ?>><?= date('F Y', $month) ?></option>
+                            <option value="<?= $value ?>"><?= date('F Y', $month) ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -383,12 +383,13 @@ function icon($name) {
                     <select id="budget" name="max_rent">
                         <option value="">Any budget</option>
                         <?php foreach ([1000,1200,1500,2000,2500,3000] as $budget) { ?>
-                            <option value="<?= $budget ?>" <?= $budget === 1500 ? 'selected' : '' ?>>Up to $<?= number_format($budget) ?></option>
+                            <option value="<?= $budget ?>">Up to $<?= number_format($budget) ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <button class="button search-submit" type="submit"><?= icon('search') ?>Search homes</button>
             </form>
+            <a class="search-more" href="search.php">More search options →</a>
         </div>
     </section>
 
@@ -405,7 +406,7 @@ function icon($name) {
             <article class="home-card">
                 <div class="card-photo">
                     <a href="<?= escape($detailUrl) ?>" aria-label="View <?= escape($home['property_name']) ?>">
-                        <?php if ($photoUrl) { ?><img src="<?= escape($photoUrl) ?>" alt="<?= escape($home['property_name']) ?> interior" width="900" height="506" loading="lazy"><?php } ?>
+                        <img src="<?= escape($photoUrl ?: DEFAULT_LISTING_PHOTO) ?>" alt="<?= $photoUrl ? escape($home['property_name'] . ' interior') : '' ?>" width="900" height="506" loading="lazy">
                     </a>
                     <span class="badge"><?= escape($home['badge']) ?></span>
                     <form class="favorite-form" action="index.php" method="post">
@@ -432,8 +433,8 @@ function icon($name) {
             <div class="collection-grid">
                 <?php $collections = [
                     ['01','pin','Near Campus','Under a 15-minute walk','max_walk=15'],
-                    ['02','people','Shared Apartments','Split rent, build community','collection=shared'],
-                    ['03','key','Private Rooms','A space that is all yours','collection=private-room'],
+                    ['02','key','One Bedroom','A place of your own','unit_type=One+Bedroom'],
+                    ['03','people','Larger Apartments','Room for more','bedrooms=2'],
                     ['04','wallet','Budget Friendly','Great homes under $1,200','max_rent=1200'],
                 ]; foreach ($collections as $collection) { ?>
                 <a class="collection" href="results.php?<?= escape($collection[4]) ?>">

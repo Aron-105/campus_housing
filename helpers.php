@@ -1,5 +1,7 @@
 <?php
 // Small display helpers; no framework or dependencies.
+const DEFAULT_LISTING_PHOTO = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c';
+
 function escape($value) {
     return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
@@ -60,6 +62,7 @@ function photo_source($url) {
     if (!is_string($url) || trim($url) === '') { return ''; }
     $url = trim($url);
     if (filter_var($url, FILTER_VALIDATE_URL) && parse_url($url, PHP_URL_SCHEME) === 'https') {
+        if (in_array(parse_url($url, PHP_URL_HOST), ['example.com', 'www.example.com'], true)) { return ''; }
         return $url;
     }
     if (preg_match('~\A(?!/)(?!.*\.\.)[a-zA-Z0-9_./-]+\z~', $url)) {

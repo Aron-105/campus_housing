@@ -90,8 +90,31 @@ function browse_listings(mysqli $db, array $filters) {
         ($where ? ' WHERE ' . implode(' AND ', $where) : '') .
         ' ORDER BY l.created_at DESC, h.listing_id DESC';
     $statement = $db->prepare($sql);
-    $statement->execute($params);
-    $rows = $statement->get_result()->fetch_all(MYSQLI_ASSOC);
+    if ($params) {
+        $types = implode('', array_map(function ($value) {
+            return is_int($value) ? 'i' : 's';
+        }, $params));
+        $bindings = [];
+        foreach ($params as $key => &$value) { $bindings[] = &$value; }
+        unset($value);
+        $statement->bind_param($types, ...$bindings);
+    }
+    $statement->execute();
+    $metadata = $statement->result_metadata();
+    $row = [];
+    $columns = [];
+    foreach ($metadata->fetch_fields() as $field) {
+        $row[$field->name] = null;
+        $columns[] = &$row[$field->name];
+    }
+    $statement->bind_result(...$columns);
+    $rows = [];
+    while ($statement->fetch()) {
+        $current = [];
+        foreach ($row as $key => $value) { $current[$key] = $value; }
+        $rows[] = $current;
+    }
+    $metadata->free();
     $statement->close();
     return $rows;
 }

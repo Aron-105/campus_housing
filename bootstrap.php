@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/helpers.php';
 error_reporting(E_ALL);
-ini_set('display_errors', '1');
+ini_set('display_errors', '0');
 ini_set('zend.exception_ignore_args', '1');
 ini_set('log_errors', '1');
 $https = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
@@ -9,7 +9,7 @@ $nonce = base64_encode(random_bytes(18));
 header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: DENY');
 header('Referrer-Policy: strict-origin-when-cross-origin');
-header("Content-Security-Policy: default-src 'self'; img-src 'self' https:; font-src 'self'; style-src 'self' 'nonce-$nonce'; script-src 'self' 'nonce-$nonce'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'");
+header("Content-Security-Policy: default-src 'self'; img-src 'self' https: data:; font-src 'self'; style-src 'self' 'nonce-$nonce' https://unpkg.com; script-src 'self' 'nonce-$nonce' https://unpkg.com; connect-src 'self' https://tiles.openfreemap.org; worker-src blob:; base-uri 'self'; form-action 'self'; frame-ancestors 'none'");
 header('Cache-Control: no-store');
 if ($https) { header('Strict-Transport-Security: max-age=31536000'); }
 ini_set('session.use_strict_mode', '1');

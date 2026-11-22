@@ -53,7 +53,7 @@ function home_specs(array $home) {
     }
     if (isset($home['usc_distance_meters']) && is_numeric($home['usc_distance_meters'])) {
         $miles = (float) $home['usc_distance_meters'] / 1609.344;
-        $parts[] = rtrim(rtrim(number_format($miles, 1), '0'), '.') . ' mi';
+        $parts[] = rtrim(rtrim(number_format($miles, 1), '0'), '.') . ' mi to USC';
     }
     return implode(' · ', $parts);
 }

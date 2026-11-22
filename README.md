@@ -20,4 +20,12 @@ A PHP site for browsing student housing near USC.
 
 5. Open `http://localhost:8000`.
 
-The homepage and `search.php` submit filters to `results.php`, which reads matching listings from MySQL. Results include inactive and expired listings for the class assignment, labeled "Not currently available." Listing details and account sign-in are currently placeholder pages.
+The homepage and `search.php` submit filters to `results.php`, which reads matching listings from MySQL. Results include inactive and expired listings for the class assignment, labeled "Not currently available." Listing details read the same database; student sign-in requires the setup below.
+
+## Student accounts and reviews
+
+The application requires PHP's `curl` and `mysqli` extensions. Back up the database, then apply `schema.sql` once using a database account permitted to create tables. The new identity table maps Google subjects to existing `users`; reviews continue to use the existing `reviews` table. The database account used by the app needs read/write access to those tables and `saved_properties`.
+
+Create a Google OAuth web application, register the exact callback URL ending in `/auth.php`, and add `google_client_id`, `google_client_secret`, and `google_redirect_uri` to the ignored `config.php` (see `config.example.php`). Use HTTPS in deployment and keep the client secret private. Sign-in accepts verified `@usc.edu` Google addresses. Administrators are a placeholder. An authenticated student can submit one editable review per property; reviews are published immediately.
+
+The map reads `properties.latitude` and `properties.longitude`; properties without verified coordinates remain in the listing results but have no pin. The map uses OpenFreeMap Positron and does not require an API key. See [listing data research](LISTING_DATA.md) for source research, mapping, and the proposed future sync. No automated scraper or sync is installed.

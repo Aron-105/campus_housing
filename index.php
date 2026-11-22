@@ -160,8 +160,9 @@ function icon($name) {
         .menu-button { display:none; width:44px; height:44px; border:1px solid var(--line); background:white; padding:10px; }
         .menu-button span { display:block; height:2px; background:var(--ink); margin-block:5px; }
         .hero { height:612px; position:relative; background:var(--cream); }
-        .hero-image { position:absolute; left:47.375%; top:0; width:52.625%; height:100%; object-fit:cover; object-position:center; }
-        .hero-content { position:relative; padding-top:185px; }
+        .hero-image { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; }
+        .hero::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(232,228,218,.97) 0%, rgba(232,228,218,.88) 40%, rgba(232,228,218,.2) 100%); }
+        .hero-content { position:relative; z-index:1; padding-top:185px; }
         h1 { margin:0; font:700 80px/1.04 'Libre Baskerville',Georgia,serif; letter-spacing:-4.5px; }
         h1 span, h1 em { display:block; width:max-content; max-width:100%; }
         h1 em { font-weight:400; color:var(--red); letter-spacing:-4.8px; }
@@ -203,6 +204,7 @@ function icon($name) {
         .price { font-size:16px; font-weight:900; margin:0; white-space:nowrap; }
         .price small { color:var(--muted); font-size:11px; font-weight:700; }
         .neighborhood { margin:5px 0 13px; font-size:16px; color:var(--muted); line-height:1.5; }
+        .rating { margin:0 0 10px; color:#515b58; font-size:13px; }
         .specs { border-top:1px solid #e6e7e5; padding-top:12px; margin:0; font-size:14px; font-weight:700; color:#5d6866; line-height:1.5; }
         .rent-basis { font-size:12px; font-weight:400; }
         .empty-state { border:1px solid var(--line); padding:40px; line-height:1.7; }
@@ -233,7 +235,7 @@ function icon($name) {
         .footer-bottom { display:flex; justify-content:space-between; gap:20px; border-top:1px solid #726b60; padding:24px 0; font-size:10px; line-height:1.5; }
         .footer-bottom p { margin:0; }
         .footer-bottom a:hover { text-decoration:underline; }
-        @media (min-width:1601px) { .hero-image { left:calc(50% - 42px); width:calc(50% + 42px); } }
+
         @media (max-width:1300px) {
             .wrap { width:calc(100% - 112px); }
             .main-nav { gap:28px; }
@@ -287,8 +289,9 @@ function icon($name) {
             .main-nav { position:absolute; top:75px; left:0; right:0; padding:20px; background:white; border-bottom:1px solid var(--red); display:none; box-shadow:0 8px 12px #0000000a; }
             .main-nav.is-open { display:grid; gap:8px; }
             .main-nav a { padding:12px 4px; font-size:14px; }
-            .hero { height:auto; display:flex; flex-direction:column; }
-            .hero-image { position:static; order:2; width:100%; height:260px; object-position:center; }
+            .hero { height:auto; min-height:480px; }
+            .hero-image { position:absolute; width:100%; height:100%; }
+            .hero::after { background:rgba(232,228,218,.86); }
             .hero-content { padding-top:54px; padding-bottom:30px; }
             h1 { font-size:clamp(31px,7.7vw,52px); letter-spacing:-1.8px; line-height:1.16; }
             h1 em { letter-spacing:-2px; }
@@ -421,6 +424,7 @@ function icon($name) {
                     <p class="price"><?php if (isset($home['monthly_rent'])) { ?>$<?= number_format((float) $home['monthly_rent']) ?><small>/mo</small><?php } ?></p>
                 </div>
                 <p class="neighborhood"><?= escape($home['neighborhood'] ?? '') ?></p>
+                <?php if (!empty($home['review_count']) && isset($home['average_rating'])) { ?><p class="rating"><?= escape(number_format((float)$home['average_rating'], 1)) ?> / 5 · <?= (int)$home['review_count'] ?> reviews</p><?php } ?>
                 <p class="specs"><?= escape(home_specs($home)) ?><?php if (!empty($home['rent_basis'])) { ?><span class="rent-basis"> · <?= escape($home['rent_basis']) ?></span><?php } ?></p>
             </article>
             <?php } ?>

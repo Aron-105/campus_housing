@@ -77,7 +77,7 @@ function browse_listings(mysqli $db, array $filters) {
         $params[] = $filters['unit_type'];
     }
 
-    $sql = "SELECT h.*, l.created_at AS listing_created_at,
+    $sql = "SELECT h.*, p.latitude, p.longitude, l.created_at AS listing_created_at,
         l.available_until AS listing_available_until,
         (SELECT ph.file_url FROM photos ph
          WHERE ph.property_id = h.property_id
@@ -86,7 +86,8 @@ function browse_listings(mysqli $db, array $filters) {
          ORDER BY (ph.unit_id = h.unit_id) DESC, ph.photo_id ASC
          LIMIT 1) AS photo_url
         FROM vw_housing_overview h
-        INNER JOIN listings l ON l.listing_id = h.listing_id " .
+        INNER JOIN listings l ON l.listing_id = h.listing_id
+        INNER JOIN properties p ON p.property_id = h.property_id " .
         ($where ? ' WHERE ' . implode(' AND ', $where) : '') .
         ' ORDER BY l.created_at DESC, h.listing_id DESC';
     $statement = $db->prepare($sql);
@@ -100,6 +101,13 @@ function browse_listings(mysqli $db, array $filters) {
         $statement->bind_param($types, ...$bindings);
     }
     $statement->execute();
+    $rows = browse_statement_rows($statement);
+    $statement->close();
+    return $rows;
+}
+
+
+function browse_statement_rows(mysqli_stmt $statement) {
     $metadata = $statement->result_metadata();
     $row = [];
     $columns = [];
@@ -115,6 +123,5 @@ function browse_listings(mysqli $db, array $filters) {
         $rows[] = $current;
     }
     $metadata->free();
-    $statement->close();
     return $rows;
 }

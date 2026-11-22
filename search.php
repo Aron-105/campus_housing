@@ -5,12 +5,13 @@ $filters = browse_filters($_GET);
 $neighborhoods = [];
 $unitTypes = [];
 $homes = [];
-$isResults = false;
+$isResults = true;
 $errorMessage = '';
 try {
     $db = browse_database();
     $neighborhoods = browse_neighborhoods($db);
     $unitTypes = browse_unit_types($db);
+    $homes = browse_listings($db, $filters);
     $db->close();
 } catch (Throwable $error) {
     error_log('HomeSC search page: ' . $error->getMessage());

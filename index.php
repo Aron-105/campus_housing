@@ -437,7 +437,7 @@ function icon($name) {
             <div class="collection-grid">
                 <?php $collections = [
                     ['01','pin','Near Campus','Under a 15-minute walk','max_walk=15'],
-                    ['02','key','One Bedroom','A place of your own','unit_type=One+Bedroom'],
+                    ['02','key','1+ Bedrooms','Homes with at least one bedroom','bedrooms=1'],
                     ['03','people','Larger Apartments','Room for more','bedrooms=2'],
                     ['04','wallet','Budget Friendly','Great homes under $1,200','max_rent=1200'],
                 ]; foreach ($collections as $collection) { ?>

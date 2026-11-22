@@ -4,6 +4,8 @@ require_once __DIR__ . '/helpers.php';
 function browse_filters(array $input) {
     $month = request_text($input, 'move_in');
     if (!preg_match('/\A\d{4}-(0[1-9]|1[0-2])\z/', $month)) { $month = ''; }
+    $legacyTypes = ['One Bedroom'=>1, 'Two Bedroom'=>2, 'Three Bedroom'=>3, 'Four Bedroom'=>4, 'Five Plus Bedrooms'=>5];
+    $legacyBedrooms = $legacyTypes[request_text($input, 'unit_type')] ?? null;
     return [
         'location' => request_text($input, 'location'),
         'move_in' => $month,
@@ -12,8 +14,8 @@ function browse_filters(array $input) {
         'max_walk' => filter_var($input['max_walk'] ?? null, FILTER_VALIDATE_INT,
             ['options' => ['min_range' => 1, 'max_range' => 180]]) ?: null,
         'bedrooms' => filter_var($input['bedrooms'] ?? null, FILTER_VALIDATE_INT,
-            ['options' => ['min_range' => 1, 'max_range' => 10]]) ?: null,
-        'unit_type' => request_text($input, 'unit_type'),
+            ['options' => ['min_range' => 1, 'max_range' => 10]]) ?: $legacyBedrooms,
+        'unit_type' => '',
     ];
 }
 

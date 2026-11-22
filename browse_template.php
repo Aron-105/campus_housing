@@ -55,14 +55,9 @@ $count = count($homes);
                             <option value="">Any distance</option>
                             <?php foreach ([10, 15, 20, 30] as $minutes) { ?><option value="<?= $minutes ?>" <?= $filters['max_walk'] === $minutes ? 'selected' : '' ?>>About <?= $minutes ?> minutes or less</option><?php } ?>
                         </select></div>
-                        <div class="field"><label for="bedrooms">Bedrooms</label><select id="bedrooms" name="bedrooms">
-                            <option value="">Any number</option>
-                            <?php foreach ([1, 2, 3, 4] as $beds) { ?><option value="<?= $beds ?>" <?= $filters['bedrooms'] === $beds ? 'selected' : '' ?>><?= $beds ?>+ bedrooms</option><?php } ?>
-                        </select></div>
-                        <div class="field"><label for="unit-type">Home type</label><select id="unit-type" name="unit_type">
-                            <option value="">Any type</option>
-                            <?php if ($filters['unit_type'] !== '' && !in_array($filters['unit_type'], $unitTypes, true)) { ?><option value="<?= escape($filters['unit_type']) ?>" selected><?= escape($filters['unit_type']) ?></option><?php } ?>
-                            <?php foreach ($unitTypes as $type) { ?><option value="<?= escape($type) ?>" <?= $filters['unit_type'] === $type ? 'selected' : '' ?>><?= escape($type) ?></option><?php } ?>
+                        <div class="field"><label for="bedrooms">Bedrooms in the home</label><select id="bedrooms" name="bedrooms">
+                            <option value="">Any number of bedrooms</option>
+                            <?php foreach ([1, 2, 3, 4, 5] as $beds) { ?><option value="<?= $beds ?>" <?= $filters['bedrooms'] === $beds ? 'selected' : '' ?>><?= $beds ?>+ bedrooms</option><?php } ?>
                         </select></div>
                     </div>
                     <p class="filter-note">Walking times are estimates based on distance to USC.</p>

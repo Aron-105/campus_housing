@@ -48,12 +48,12 @@ function home_specs(array $home) {
               (isset($home['bedrooms']) && (float) $home['bedrooms'] === 0.0)) {
         $parts[] = 'Studio';
     } else {
-        if (isset($home['bedrooms'])) { $parts[] = (float) $home['bedrooms'] . ' bd'; }
-        if (isset($home['bathrooms'])) { $parts[] = (float) $home['bathrooms'] . ' ba'; }
+        if (isset($home['bedrooms'])) { $parts[] = (float) $home['bedrooms'] . ((float) $home['bedrooms'] === 1.0 ? ' bedroom in home' : ' bedrooms in home'); }
+        if (isset($home['bathrooms'])) { $parts[] = (float) $home['bathrooms'] . ((float) $home['bathrooms'] === 1.0 ? ' bathroom' : ' bathrooms'); }
     }
     if (isset($home['usc_distance_meters']) && is_numeric($home['usc_distance_meters'])) {
         $miles = (float) $home['usc_distance_meters'] / 1609.344;
-        $parts[] = rtrim(rtrim(number_format($miles, 1), '0'), '.') . ' mi';
+        $parts[] = rtrim(rtrim(number_format($miles, 1), '0'), '.') . ' mi to USC';
     }
     return implode(' · ', $parts);
 }

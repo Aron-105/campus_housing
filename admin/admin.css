@@ -1,0 +1,396 @@
+/* HomeSC admin styles */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f0ede5;
+    color: #1f292a;
+    font-family: 'DM Sans', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+a {
+    color: #a00000;
+}
+
+h1, h2 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 400;
+}
+
+h1 {
+    margin: 40px 0 8px;
+    font-size: 36px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.intro {
+    margin: 0 0 30px;
+    color: #5f6764;
+}
+
+.muted {
+    color: #5f6764;
+    font-size: 14px;
+}
+
+/* header */
+
+.admin-header {
+    background: #a00000;
+    border-bottom: 4px solid #ffcc00;
+}
+
+.admin-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo img {
+    background: #fff;
+    padding: 4px 8px;
+}
+
+.logo span {
+    color: #ffcc00;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.back-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* mini nav */
+
+.admin-nav {
+    background: #fff;
+    border-bottom: 1px solid #b9b2a7;
+}
+
+.admin-nav .container {
+    display: flex;
+    gap: 30px;
+}
+
+.admin-nav a {
+    padding: 16px 0;
+    color: #5f6764;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+}
+
+.admin-nav a:hover {
+    color: #a00000;
+}
+
+.admin-nav a.active {
+    color: #a00000;
+    border-bottom-color: #a00000;
+}
+
+/* dashboard cards */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+.card {
+    display: block;
+    padding: 28px;
+    background: #fff;
+    border: 1px solid #b9b2a7;
+    border-top: 4px solid #a00000;
+    color: inherit;
+    text-decoration: none;
+}
+
+.card:hover {
+    border-color: #a00000;
+}
+
+.card h2 {
+    margin: 0 0 8px;
+    font-size: 22px;
+}
+
+.card p {
+    margin: 0 0 20px;
+    color: #5f6764;
+}
+
+.card-link {
+    color: #a00000;
+    font-weight: 700;
+}
+
+/* buttons */
+
+.btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border: 0;
+    background: #a00000;
+    color: #ffcc00;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    vertical-align: middle;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #360008;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #a00000;
+    box-shadow: inset 0 0 0 1px #a00000;
+    margin-left: 8px;
+}
+
+.btn-outline:hover {
+    background: #fff;
+}
+
+.btn-small {
+    padding: 7px 14px;
+    font-size: 13px;
+}
+
+.btn-danger {
+    background: #fff;
+    color: #a00000;
+    box-shadow: inset 0 0 0 1px #a00000;
+}
+
+.btn-danger:hover {
+    background: #a00000;
+    color: #fff;
+}
+
+.confirm-box .btn-danger {
+    background: #a00000;
+    color: #fff;
+}
+
+/* forms */
+
+.listing-form {
+    margin-bottom: 60px;
+}
+
+fieldset {
+    margin: 0 0 24px;
+    padding: 24px 28px 28px;
+    background: #fff;
+    border: 1px solid #b9b2a7;
+}
+
+legend {
+    padding: 0 8px;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 20px;
+}
+
+label {
+    display: block;
+    margin: 16px 0 6px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="url"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #b9b2a7;
+    background: #fff;
+    font: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid #a00000;
+    border-color: #a00000;
+}
+
+.row {
+    display: flex;
+    gap: 20px;
+}
+
+.row > div {
+    flex: 1;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 400;
+}
+
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    flex: 1;
+    max-width: 400px;
+}
+
+/* tables */
+
+.admin-table {
+    width: 100%;
+    margin-bottom: 60px;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid #b9b2a7;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e1ddd4;
+}
+
+.admin-table th {
+    background: #e8e4da;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.admin-table .actions {
+    text-align: right;
+}
+
+.status {
+    padding: 3px 10px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.status.active {
+    background: #e3f1e5;
+    color: #22662f;
+}
+
+.status.leased {
+    background: #fff6d1;
+    color: #7a5b00;
+}
+
+.status.expired {
+    background: #eee;
+    color: #5f6764;
+}
+
+/* delete confirm */
+
+.confirm-box {
+    max-width: 560px;
+    margin-bottom: 60px;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #b9b2a7;
+    border-left: 4px solid #a00000;
+}
+
+.confirm-box h2 {
+    margin-top: 0;
+}
+
+/* footer */
+
+.admin-footer {
+    border-top: 1px solid #b9b2a7;
+    color: #5f6764;
+    font-size: 13px;
+}
+
+/* smaller screens */
+
+@media (max-width: 800px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .admin-nav .container {
+        gap: 18px;
+        overflow-x: auto;
+    }
+
+    .admin-nav a {
+        white-space: nowrap;
+    }
+
+    .container {
+        padding: 0 20px;
+    }
+
+    .admin-table th:nth-child(2),
+    .admin-table td:nth-child(2),
+    .admin-table th:nth-child(4),
+    .admin-table td:nth-child(4) {
+        display: none;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 12px 10px;
+    }
+
+    .search-bar input {
+        min-width: 0;
+    }
+}

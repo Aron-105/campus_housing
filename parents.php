@@ -14,10 +14,9 @@ $gettingStarted = [
 
 $money = [
     ['What will off-campus housing cost?', '<p>Costs vary widely by neighborhood, building type and whether rent is per bedroom or per unit. Beyond rent, plan for utilities, internet, parking, renter’s insurance and furniture. Use the rent filter on our <a class="text-link" href="search.php">search page</a> to see current listings in your budget.</p>'],
-    ['How much is due before move-in?', '<p>Typically the first month’s rent plus a security deposit, and sometimes application fees. Since July 1, 2024, California law limits most landlords to a deposit of no more than one month’s rent; some small landlords may charge up to two months.</p>'],
-    ['What does it mean to be a guarantor or co-signer?', '<p>Many landlords ask students without income or credit history for a guarantor, often a parent, who agrees to pay rent or damages if the student doesn’t. On a joint lease, a guarantee may cover the entire unit’s rent, not just your student’s share. Read the guarantor agreement carefully and ask the landlord to limit it to your student’s portion if possible.</p>'],
+    ['How much is due before move-in?', '<p>Typically the first month’s rent plus a security deposit, and sometimes application fees.</p>'],
+    ['What does it mean to be a guarantor or co-signer?', '<p>Many landlords ask students without income or credit history for a guarantor, often a parent, who agrees to pay rent or damages if the student doesn’t.</p>'],
     ['Will we pay rent during the summer?', '<p>Most leases near campus run for 12 months. If your student will be away, ask whether the landlord allows subletting before signing.</p>'],
-    ['How should rent be paid?', '<p>Use a traceable method such as a property management portal, check or bank transfer, and keep receipts. Never pay by wire transfer, gift card or cryptocurrency, and never pay for a unit no one has seen.</p>'],
 ];
 
 $safety = [
@@ -30,7 +29,7 @@ $safety = [
 
 site_header();
 page_hero('For parents & families', 'Helping your student<br><em>find home.</em>',
-    'Moving off campus is a big step for the whole family. Here are answers to the questions parents ask us most.');
+    'Moving off campus is a big step. Here are answers to the questions parents ask most.');
 ?>
 <section class="section">
     <div class="wrap narrow">

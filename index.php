@@ -351,6 +351,7 @@ function icon($name) {
             <a href="students.php">Students</a>
             <a href="parents.php">Parents</a>
             <a href="resources.php">Resources</a>
+            <a href="reviews.php">Reviews</a>
             <a href="about.php">About</a>
         </nav>
         <a class="button login-button" href="login.php"><?= $userId ? 'Account' : 'Log In' ?></a>
@@ -458,7 +459,7 @@ function icon($name) {
     <div class="wrap">
         <div class="footer-top">
             <div class="footer-brand"><a class="brand" href="index.php" aria-label="HomeSC home"><img src="assets/logo-footer.png" width="110" height="34" alt="HomeSC"></a><p>Your place near campus starts here.</p></div>
-            <div class="footer-column"><h2>Explore</h2><ul><li><a href="results.php">Browse listings</a></li><li><a href="search.php">Search</a></li><li><a href="about.php">About HomeSC</a></li></ul></div>
+            <div class="footer-column"><h2>Explore</h2><ul><li><a href="results.php">Browse listings</a></li><li><a href="search.php">Search</a></li><li><a href="reviews.php">Student reviews</a></li><li><a href="about.php">About HomeSC</a></li></ul></div>
             <div class="footer-column"><h2>Guides</h2><ul><li><a href="students.php">For students</a></li><li><a href="parents.php">For parents</a></li><li><a href="resources.php#neighborhoods">Neighborhoods</a></li><li><a href="resources.php#safety">Safety tips</a></li></ul></div>
             <div class="footer-column"><h2>Ready to find your place?</h2><a class="button footer-cta" href="#home-search">Start searching <?= icon('arrow') ?></a></div>
         </div>

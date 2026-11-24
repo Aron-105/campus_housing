@@ -117,6 +117,16 @@ details > div { padding:0 0 20px; color:var(--muted); max-width:720px; }
 .toc { display:flex; flex-wrap:wrap; gap:10px 26px; margin:0 0 48px; padding:0; list-style:none; }
 .toc a { font-weight:700; color:var(--red); }
 
+/* Placeholder notice + review cards */
+.notice-banner { background:#fff6d1; border-bottom:2px solid var(--gold); }
+.notice-banner p { margin:0; padding:14px 0; font-size:15px; }
+.review-card { display:flex; flex-direction:column; }
+.review-card .stars { margin:0 0 14px; color:var(--red); font:20px 'DejaVu Sans','Segoe UI Symbol',Arial,sans-serif; letter-spacing:3px; line-height:1; }
+.review-card .stars span { color:var(--soft-line); }
+.review-card .review-area { margin:0 0 14px; font-size:12px; font-weight:900; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
+.review-card blockquote { margin:0 0 20px; font:400 17px/1.6 'Libre Baskerville',Georgia,serif; color:var(--ink); }
+.review-meta { margin-top:auto !important; padding-top:14px; border-top:1px solid var(--soft-line); font-size:13px; }
+
 /* CTA band */
 .cta-band { padding:72px 0; background:var(--red); color:#fff; }
 .cta-band h2 { color:#fff; margin:0 0 8px; }

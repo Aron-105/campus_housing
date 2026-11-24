@@ -7,12 +7,12 @@ $currentPage = 'resources.php';
 
 // Neighborhoods around the University Park Campus. Commute times are approximate.
 $areas = [
-    ['North University Park', 'Historic Victorian and Craftsman homes just north of campus, many rented to groups of students.', 'About a 5–20 min walk', 'Groups who want a house'],
-    ['Figueroa Corridor', 'Newer purpose-built student apartments along Figueroa and Jefferson, often furnished with per-bedroom leases.', 'About a 5–15 min walk', 'Students who want amenities'],
-    ['Exposition Park', 'South of campus near the museums, Rose Garden and Coliseum, with Metro E Line stations close by.', 'About a 5–20 min walk', 'Transit riders'],
-    ['West Adams', 'Large historic homes and quieter, tree-lined streets west of campus.', 'About a 10–15 min bike ride', 'More space for the money'],
-    ['Downtown LA (South Park)', 'High-rise apartments about three miles north, connected to campus by the Metro E Line.', 'About 15–25 min by Metro', 'City living and internships'],
-    ['Koreatown', 'Dense and lively, with studios and one-bedrooms that can cost less than near campus.', 'About 25–40 min by bus', 'Solo renters on a budget'],
+    ['North University Park', 'Historic Victorian and Craftsman homes just north of campus, many rented to groups of students.', 'About a 5–20 min walk'],
+    ['Figueroa Corridor', 'Newer purpose-built student apartments along Figueroa and Jefferson, often furnished with per-bedroom leases.', 'About a 5–15 min walk'],
+    ['Exposition Park', 'South of campus near the museums, Rose Garden and Coliseum, with Metro E Line stations close by.', 'About a 5–20 min walk'],
+    ['West Adams', 'Large historic homes and quieter, tree-lined streets west of campus.', 'About a 10–15 min bike ride'],
+    ['Downtown LA (South Park)', 'High-rise apartments about three miles north, connected to campus by the Metro E Line.', 'About 15–25 min by Metro'],
+    ['Koreatown', 'Dense and lively, with studios and one-bedrooms that can cost less than near campus.', 'About 25–40 min by bus'],
 ];
 
 // USC Department of Public Safety numbers (verified November 2026 at dps.usc.edu / safety.usc.edu).
@@ -42,13 +42,12 @@ page_hero('Resources', 'Everything you need<br><em>to rent with confidence.</em>
             <p>Where you live shapes your commute, your budget and your whole year. Here’s a quick look at where USC students live.</p>
         </div>
         <div class="card-grid">
-            <?php foreach ($areas as [$name, $about, $commute, $bestFor]) { ?>
+            <?php foreach ($areas as [$name, $about, $commute]) { ?>
             <article class="card">
                 <h3><?= escape($name) ?></h3>
                 <p><?= escape($about) ?></p>
                 <dl class="facts compact">
                     <div><dt>To campus</dt><dd><?= escape($commute) ?></dd></div>
-                    <div><dt>Best for</dt><dd><?= escape($bestFor) ?></dd></div>
                 </dl>
             </article>
             <?php } ?>
@@ -65,14 +64,11 @@ page_hero('Resources', 'Everything you need<br><em>to rent with confidence.</em>
             <ol class="timeline">
                 <li><strong>Early fall</strong><h3>Pick your roommates</h3><p>Agree on budget, cleanliness, guests and schedules before you look at listings.</p></li>
                 <li><strong>Fall to winter</strong><h3>Search and tour</h3><p>Popular buildings and houses often open leasing for next year during the fall semester.</p></li>
-                <li><strong>Winter to spring</strong><h3>Apply and sign</h3><p>Compare lease terms, apply, and get every promise in writing.</p></li>
+                <li><strong>Winter to spring</strong><h3>Apply and sign</h3><p>Compare lease terms, apply, and sign.</p></li>
                 <li><strong>Summer</strong><h3>Get ready to move</h3><p>Set up utilities and internet, buy renter’s insurance, and photograph the unit on move-in day.</p></li>
             </ol>
         </div>
         <div>
-            <h3>Build a real budget</h3>
-            <p class="muted">Rent is only the start. Add utilities, internet, parking, renter’s insurance and furniture, and check whether rent is per bedroom or for the whole unit.</p>
-            <div class="callout gold"><p><strong>Deposit limit:</strong> since July 1, 2024, California’s AB 12 limits most landlords to a security deposit of one month’s rent, furnished or not. Some small landlords may charge up to two months.</p></div>
             <h3>Touring checklist</h3>
             <ul class="checklist">
                 <li>Water pressure, hot water, outlets and lights</li>

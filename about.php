@@ -14,8 +14,8 @@ page_hero('About HomeSC', 'Built by students,<br><em>for students.</em>',
         <div class="wrap split">
             <div>
                 <p class="eyebrow">Why we built it</p>
-                <h2>The housing search shouldn’t be the hardest class you take.</h2>
-                <p>Every year, thousands of Trojans move off campus. The search usually means a dozen browser tabs, group chats full of screenshots, landlord listings with no photos, and no easy way to tell how far a place really is from your 9 a.m.</p>
+                <h2>The student housing search shouldn’t be this hard.</h2>
+                <p>Every year, thousands of Trojans move off campus. The search usually means a dozen browser tabs, group chats full of screenshots, landlord listings with no photos, and no easy way to tell how far a place really is from campus.</p>
                 <p>We’ve lived that search ourselves. HomeSC is our answer: one place to browse homes near the University Park Campus, compare them side by side, and read honest reviews from students who actually lived there.</p>
             </div>
             <img src="assets/ellendale.jpg" alt="Bright apartment living room with a gray sofa and an open kitchen" width="900" height="600" loading="lazy">
@@ -29,8 +29,8 @@ page_hero('About HomeSC', 'Built by students,<br><em>for students.</em>',
                 <h2>Three ideas guide everything on HomeSC.</h2>
             </div>
             <div class="card-grid">
-                <article class="card"><span class="card-number" aria-hidden="true">1</span><h3>Everything in one place</h3><p>Rent, bedrooms, distance to campus, photos and reviews sit together on every listing, so you never have to piece the picture together yourself.</p></article>
-                <article class="card"><span class="card-number" aria-hidden="true">2</span><h3>Students trust students</h3><p>Reviews can only be written by verified USC students, and each student gets one review per property. What you read comes from people who lived there.</p></article>
+                <article class="card"><span class="card-number" aria-hidden="true">1</span><h3>Everything in one place</h3><p>Rent, bedrooms, distance to campus, photos and reviews sit together on every listing, so you never have to collect fragmented information.</p></article>
+                <article class="card"><span class="card-number" aria-hidden="true">2</span><h3>Students trust students</h3><p>Reviews can only be written by verified USC students, and each student gets one review per property.</p></article>
                 <article class="card"><span class="card-number" aria-hidden="true">3</span><h3>Distance is measured honestly</h3><p>We show how far each home is from campus so you can weigh a cheaper place farther out against a shorter walk to class.</p></article>
             </div>
         </div>

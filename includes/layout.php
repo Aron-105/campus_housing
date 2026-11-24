@@ -11,6 +11,7 @@ const SITE_NAV = [
     'students.php' => 'Students',
     'parents.php' => 'Parents',
     'resources.php' => 'Resources',
+    'reviews.php' => 'Reviews',
     'about.php' => 'About',
 ];
 
@@ -19,6 +20,7 @@ const SITE_FOOTER = [
     'Explore' => [
         'results.php' => 'Browse listings',
         'search.php' => 'Search',
+        'reviews.php' => 'Student reviews',
         'about.php' => 'About HomeSC',
         'login.php' => 'Log in',
     ],

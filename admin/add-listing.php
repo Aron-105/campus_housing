@@ -2,8 +2,11 @@
 require __DIR__ . '/common.php';
 $title = 'Add Listing'; $listing = []; $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    admin_csrf(); $listing = $_POST;
-    try { admin_save($db, $_POST, null); header('Location: edit-listing.php?saved=1', true, 303); exit; }
+    $listing = $_POST;
+    try {
+        admin_transaction($db, fn() => admin_save($db, $_POST, null));
+        admin_redirect('edit-listing.php?saved=1');
+    }
     catch (InvalidArgumentException $e) { $error = $e->getMessage(); }
     catch (Throwable $e) { error_log('Add listing: '.$e->getMessage()); $error = 'Could not save the listing.'; }
 }

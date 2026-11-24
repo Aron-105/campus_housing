@@ -5,4 +5,5 @@ return [
     'password' => 'your_database_password',
     'database' => 'your_database_name',
     'port' => 3306,
+    'admin_preview' => false,
 ];

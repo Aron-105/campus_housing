@@ -30,7 +30,7 @@ page_hero('About HomeSC', 'Built by students,<br><em>for students.</em>',
             </div>
             <div class="card-grid">
                 <article class="card"><span class="card-number" aria-hidden="true">1</span><h3>Everything in one place</h3><p>Rent, bedrooms, distance to campus, photos and reviews sit together on every listing, so you never have to collect fragmented information.</p></article>
-                <article class="card"><span class="card-number" aria-hidden="true">2</span><h3>Students trust students</h3><p>Reviews can only be written by verified USC students, and each student gets one review per property.</p></article>
+                <article class="card"><span class="card-number" aria-hidden="true">2</span><h3>Students trust students</h3><p>Signed-in users can write one review per property.</p></article>
                 <article class="card"><span class="card-number" aria-hidden="true">3</span><h3>Distance is measured honestly</h3><p>We show how far each home is from campus so you can weigh a cheaper place farther out against a shorter walk to class.</p></article>
             </div>
         </div>
@@ -45,7 +45,7 @@ page_hero('About HomeSC', 'Built by students,<br><em>for students.</em>',
             <div class="card-grid four">
                 <div class="stat"><strong>Search</strong><span>Filter by neighborhood, budget, bedrooms, move-in month and walking time.</span></div>
                 <div class="stat"><strong>Map</strong><span>See every home pinned on a map around campus.</span></div>
-                <div class="stat"><strong>Save</strong><span>Sign in with your USC Google account to keep a shortlist.</span></div>
+                <div class="stat"><strong>Save</strong><span>Sign in to keep a shortlist.</span></div>
                 <div class="stat"><strong>Review</strong><span>Share what living there was really like to help the next student.</span></div>
             </div>
             <p class="muted spaced-top">New to renting? Start with our <a class="text-link" href="students.php">student FAQ</a> or the <a class="text-link" href="resources.php">housing resources</a>. Parents and families, see <a class="text-link" href="parents.php">our guide for you</a>.</p>

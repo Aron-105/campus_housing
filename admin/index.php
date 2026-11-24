@@ -1,4 +1,10 @@
 <?php
+// Relative links in this directory need the canonical trailing slash.
+$path = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
+if (is_string($path) && substr($path, -6) === '/admin') {
+    header('Location: ' . $path . '/' . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']), true, 302);
+    exit;
+}
 $title = 'Dashboard';
 include 'header.php';
 ?>
@@ -9,7 +15,7 @@ include 'header.php';
 <div class="cards">
     <a class="card" href="add-listing.php">
         <h2>Add Listing</h2>
-        <p>Add a new property and unit to the site.</p>
+        <p>Add a listing for an existing property and unit.</p>
         <span class="card-link">Add a listing &rarr;</span>
     </a>
     <a class="card" href="edit-listing.php">

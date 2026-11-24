@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/common.php';
 $page = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>

@@ -1,58 +1,17 @@
 <?php
-$title = 'Edit Listing';
-include 'header.php';
-include 'sample-listings.php';
-
-$editing = null;
-if (isset($_GET['id'])) {
-    foreach ($listings as $l) {
-        if ($l['id'] == $_GET['id']) {
-            $editing = $l;
-        }
-    }
+require __DIR__ . '/common.php';
+$title = 'Edit Listing'; $id = filter_var($_GET['id'] ?? null, FILTER_VALIDATE_INT, ['options'=>['min_range'=>1]]); $listing = $id ? admin_listing($db, $id) : null; $error = '';
+if ($id && !$listing) { http_response_code(404); }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $listing) {
+    admin_csrf(); $listing = $_POST;
+    try { admin_save($db, $_POST, $id); header('Location: edit-listing.php?saved=1', true, 303); exit; }
+    catch (InvalidArgumentException $e) { $error = $e->getMessage(); }
+    catch (Throwable $e) { error_log('Edit listing: '.$e->getMessage()); $error = 'Could not save the listing.'; }
 }
+include 'header.php';
 ?>
-
-<?php if ($editing) { ?>
-
-    <h1>Edit Listing</h1>
-    <p class="intro">Editing <strong><?php echo htmlspecialchars($editing['name']); ?></strong>. <a href="edit-listing.php">Back to all listings</a></p>
-
-    <?php
-    $listing = $editing;
-    $buttonText = 'Save changes';
-    include 'listing-form.php';
-    ?>
-
-<?php } else { ?>
-
-    <h1>Edit Listing</h1>
-    <p class="intro">Choose a listing to edit.</p>
-
-    <form class="search-bar" method="get" action="">
-        <input type="text" name="q" placeholder="Search by name or address">
-        <button type="submit" class="btn">Search</button>
-    </form>
-
-    <table class="admin-table">
-        <tr>
-            <th>Property</th>
-            <th>Neighborhood</th>
-            <th>Rent</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
-        <?php foreach ($listings as $l) { ?>
-        <tr>
-            <td><strong><?php echo $l['name']; ?></strong><br><span class="muted"><?php echo $l['address']; ?></span></td>
-            <td><?php echo $l['neighborhood']; ?></td>
-            <td>$<?php echo number_format($l['rent']); ?>/mo</td>
-            <td><span class="status <?php echo $l['status']; ?>"><?php echo ucfirst($l['status']); ?></span></td>
-            <td class="actions"><a class="btn btn-small" href="edit-listing.php?id=<?php echo $l['id']; ?>">Edit</a></td>
-        </tr>
-        <?php } ?>
-    </table>
-
-<?php } ?>
-
-<?php include 'footer.php'; ?>
+<h1>Edit Listing</h1>
+<?php if ($id && !$listing) { ?><p>Listing not found.</p><?php } elseif ($listing) { $buttonText = 'Save changes'; include 'listing-form.php'; } else { ?>
+<?php if (isset($_GET['saved'])) { ?><p role="status">Listing saved.</p><?php } ?>
+<table class="admin-table"><tr><th>Listing</th><th>Property</th><th>Rent</th><th>Status</th><th></th></tr><?php foreach (admin_listings($db) as $row) { ?><tr><td><?= escape($row['title']) ?></td><td><?= escape($row['property_name']) ?></td><td>$<?= escape($row['monthly_rent']) ?></td><td><?= escape($row['status']) ?></td><td><a href="edit-listing.php?id=<?= (int)$row['listing_id'] ?>">Edit</a></td></tr><?php } ?></table>
+<?php } include 'footer.php'; ?>

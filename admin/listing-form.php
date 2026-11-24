@@ -1,140 +1,18 @@
 <?php
-// $listing can be set before including this file to fill in the fields
-if (!isset($listing)) {
-    $listing = [];
-}
-
-function field($listing, $key) {
-    if (isset($listing[$key])) {
-        return htmlspecialchars($listing[$key]);
-    }
-    return '';
-}
+$units = $db->query('SELECT u.unit_id, u.unit_label, p.name, ut.name AS unit_type FROM units u JOIN properties p ON p.property_id=u.property_id JOIN unit_types ut ON ut.unit_type_id=u.unit_type_id ORDER BY p.name, u.unit_id')->fetch_all(MYSQLI_ASSOC);
+$bases = $db->query('SELECT rent_basis_id, name FROM rent_bases ORDER BY name')->fetch_all(MYSQLI_ASSOC);
+function field($listing, $key) { return escape((string)($listing[$key] ?? '')); }
 ?>
-
-<form class="listing-form" method="post" action="">
-
-    <fieldset>
-        <legend>Property</legend>
-
-        <label for="name">Property name</label>
-        <input type="text" id="name" name="name" value="<?php echo field($listing, 'name'); ?>" required>
-
-        <label for="address">Street address</label>
-        <input type="text" id="address" name="address" value="<?php echo field($listing, 'address'); ?>" required>
-
-        <div class="row">
-            <div>
-                <label for="city">City</label>
-                <input type="text" id="city" name="city" value="Los Angeles">
-            </div>
-            <div>
-                <label for="state">State</label>
-                <input type="text" id="state" name="state" value="CA" maxlength="2">
-            </div>
-            <div>
-                <label for="zip">Zip code</label>
-                <input type="text" id="zip" name="zip" maxlength="5">
-            </div>
-        </div>
-
-        <label for="neighborhood">Neighborhood</label>
-        <select id="neighborhood" name="neighborhood">
-            <option value="">Choose a neighborhood</option>
-            <?php
-            $neighborhoods = ['North University Park', 'Figueroa Corridor', 'Exposition Park', 'West Adams', 'Downtown LA', 'Koreatown'];
-            foreach ($neighborhoods as $n) {
-                $selected = (field($listing, 'neighborhood') == $n) ? 'selected' : '';
-                echo "<option $selected>$n</option>";
-            }
-            ?>
-        </select>
-
-        <label for="description">Description</label>
-        <textarea id="description" name="description" rows="4"></textarea>
-    </fieldset>
-
-    <fieldset>
-        <legend>Unit</legend>
-
-        <div class="row">
-            <div>
-                <label for="unit_type">Unit type</label>
-                <select id="unit_type" name="unit_type">
-                    <option>Private room</option>
-                    <option>Studio</option>
-                    <option>Apartment</option>
-                    <option>House</option>
-                </select>
-            </div>
-            <div>
-                <label for="bedrooms">Bedrooms</label>
-                <input type="number" id="bedrooms" name="bedrooms" min="0" max="10" value="<?php echo field($listing, 'bedrooms'); ?>">
-            </div>
-            <div>
-                <label for="bathrooms">Bathrooms</label>
-                <input type="number" id="bathrooms" name="bathrooms" min="0" max="10" step="0.5">
-            </div>
-        </div>
-
-        <div class="row">
-            <div>
-                <label for="rent">Monthly rent ($)</label>
-                <input type="number" id="rent" name="rent" min="0" value="<?php echo field($listing, 'rent'); ?>" required>
-            </div>
-            <div>
-                <label for="rent_basis">Rent is</label>
-                <select id="rent_basis" name="rent_basis">
-                    <option value="per_person">Per person</option>
-                    <option value="per_unit">For the whole unit</option>
-                </select>
-            </div>
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>Listing</legend>
-
-        <div class="row">
-            <div>
-                <label for="available_from">Available from</label>
-                <input type="date" id="available_from" name="available_from">
-            </div>
-            <div>
-                <label for="available_until">Available until</label>
-                <input type="date" id="available_until" name="available_until">
-            </div>
-            <div>
-                <label for="status">Status</label>
-                <select id="status" name="status">
-                    <?php
-                    $statuses = ['active', 'leased', 'expired'];
-                    foreach ($statuses as $s) {
-                        $selected = (field($listing, 'status') == $s) ? 'selected' : '';
-                        echo "<option value=\"$s\" $selected>" . ucfirst($s) . "</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-        </div>
-
-        <div class="row">
-            <div>
-                <label for="deposit">Security deposit ($)</label>
-                <input type="number" id="deposit" name="deposit" min="0">
-            </div>
-            <div>
-                <label for="app_fee">Application fee ($)</label>
-                <input type="number" id="app_fee" name="app_fee" min="0">
-            </div>
-        </div>
-
-        <label class="checkbox"><input type="checkbox" name="utilities_included" value="1"> Utilities included</label>
-
-        <label for="listing_url">Original listing link</label>
-        <input type="url" id="listing_url" name="listing_url" placeholder="https://">
-    </fieldset>
-
-    <button type="submit" class="btn"><?php echo $buttonText; ?></button>
-    <a class="btn btn-outline" href="index.php">Cancel</a>
-</form>
+<?php if (!empty($error)) { ?><p role="alert"><?= escape($error) ?></p><?php } ?>
+<p>Choose an existing property unit. A property must be published for its listings to appear in public search.</p>
+<form class="listing-form" method="post">
+<input type="hidden" name="csrf_token" value="<?= escape($csrfToken) ?>">
+<label for="title">Listing title</label><input id="title" name="title" maxlength="255" value="<?= field($listing, 'title') ?>" required>
+<label for="unit_id">Property and unit</label><select id="unit_id" name="unit_id" required><option value="">Choose a unit</option><?php foreach ($units as $unit) { ?><option value="<?= (int)$unit['unit_id'] ?>" <?= (string)($listing['unit_id'] ?? '') === (string)$unit['unit_id'] ? 'selected' : '' ?>><?= escape($unit['name'] . ' — ' . $unit['unit_type'] . ($unit['unit_label'] ? ' (' . $unit['unit_label'] . ')' : '') . ' #' . $unit['unit_id']) ?></option><?php } ?></select>
+<label for="monthly_rent">Monthly rent ($)</label><input id="monthly_rent" name="monthly_rent" type="number" min="0" max="99999999.99" step="0.01" value="<?= field($listing, 'monthly_rent') ?>" required>
+<label for="rent_basis_id">Rent basis</label><select id="rent_basis_id" name="rent_basis_id" required><option value="">Choose rent basis</option><?php foreach ($bases as $basis) { ?><option value="<?= (int)$basis['rent_basis_id'] ?>" <?= (string)($listing['rent_basis_id'] ?? '') === (string)$basis['rent_basis_id'] ? 'selected' : '' ?>><?= escape($basis['name']) ?></option><?php } ?></select>
+<label for="status">Status</label><select id="status" name="status"><?php foreach (['pending','active','leased','expired','inactive'] as $status) { ?><option value="<?= $status ?>" <?= ($listing['status'] ?? 'pending') === $status ? 'selected' : '' ?>><?= ucfirst($status) ?></option><?php } ?></select>
+<label for="available_from">Available from</label><input id="available_from" name="available_from" type="date" value="<?= field($listing, 'available_from') ?>">
+<label for="available_until">Available until</label><input id="available_until" name="available_until" type="date" value="<?= field($listing, 'available_until') ?>">
+<label for="listing_url">Original listing link</label><input id="listing_url" name="listing_url" type="url" maxlength="500" value="<?= field($listing, 'listing_url') ?>">
+<button type="submit" class="btn"><?= escape($buttonText) ?></button> <a class="btn btn-outline" href="index.php">Cancel</a></form>

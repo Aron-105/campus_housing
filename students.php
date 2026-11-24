@@ -7,7 +7,7 @@ $currentPage = 'students.php';
 
 $usingHomeSC = [
     ['Is HomeSC free?', '<p>Yes. HomeSC is free for students. You can search and view every listing without an account.</p>'],
-    ['Do I need an account?', '<p>Only to save homes or write reviews. Sign in with your <strong>@usc.edu</strong> Google account from the <a class="text-link" href="login.php">log in page</a>. Searching, browsing and reading reviews don’t require an account.</p>'],
+    ['Do I need an account?', '<p>Only to save homes or write reviews. Sign in with your HomeSC account from the <a class="text-link" href="login.php">log in page</a>. Searching, browsing and reading reviews don’t require an account.</p>'],
     ['How do I search for a home?', '<p>Use the search bar on the homepage or the <a class="text-link" href="search.php">full search page</a>. You can filter by neighborhood, maximum rent, number of bedrooms, move-in month and maximum walking time to campus. Results appear as cards and as pins on a map.</p>'],
     ['What does “Not currently available” mean?', '<p>The home has been leased or its listing has expired. We keep it visible so you can still read its reviews and get a sense of the building.</p>'],
     ['Who can write reviews?', '<p>Any signed-in USC student. You can write one review per property and edit it any time. Please review only places you’ve lived or toured, and keep it honest and respectful.</p>'],

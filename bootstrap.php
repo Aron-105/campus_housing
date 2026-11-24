@@ -21,6 +21,6 @@ if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 $csrfToken = $_SESSION['csrf_token'];
-// A future login page must set this ONLY after verifying the user's password.
+// The session user ID is set only after successful account authentication.
 $userId = filter_var($_SESSION['user_id'] ?? null, FILTER_VALIDATE_INT,
     ['options'=>['min_range'=>1, 'max_range'=>2147483647]]);

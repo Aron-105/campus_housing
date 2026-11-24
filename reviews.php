@@ -2,7 +2,7 @@
 require __DIR__ . '/bootstrap.php';
 require __DIR__ . '/includes/layout.php';
 $pageTitle = 'Reviews';
-$pageDescription = 'Student reviews of homes near USC, written by verified USC students.';
+$pageDescription = 'Reviews of homes near USC.';
 $currentPage = 'reviews.php';
 
 // PLACEHOLDER: sample reviews to show the layout. In the final build these
@@ -23,7 +23,7 @@ site_header();
 </div>
 <?php
 page_hero('Student reviews', 'Hear it from<br><em>the people who lived there.</em>',
-    'Every review on HomeSC is written by a verified USC student. Read what it’s really like to live in homes near campus before you sign.');
+    'Read about homes near campus before you sign.');
 ?>
 <section class="section">
     <div class="wrap">
@@ -45,7 +45,7 @@ page_hero('Student reviews', 'Hear it from<br><em>the people who lived there.</e
     <div class="wrap split">
         <div>
             <h2>Lived somewhere near campus?</h2>
-            <p class="muted">Help the next Trojan find home. Sign in with your USC Google account and leave a review on any listing’s page.</p>
+            <p class="muted">Help the next Trojan find home. Sign in with your HomeSC account and leave a review on any listing’s page.</p>
         </div>
         <div><a class="button large secondary" href="results.php">Browse listings to review →</a></div>
     </div>

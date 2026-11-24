@@ -1,6 +1,4 @@
--- Apply once to the existing HomeSC database after backing it up.
-CREATE TABLE IF NOT EXISTS google_identities (
-    google_subject VARCHAR(255) NOT NULL PRIMARY KEY,
-    user_id INT NOT NULL UNIQUE,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
-);
+-- Back up the database first. Apply once to the existing HomeSC users table.
+ALTER TABLE users ADD COLUMN is_admin TINYINT(1) NOT NULL DEFAULT 0;
+-- Promote an existing account manually with a database administrator, e.g.:
+-- UPDATE users SET is_admin = 1 WHERE email = 'admin@example.com';

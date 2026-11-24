@@ -7,7 +7,7 @@ $currentPage = 'parents.php';
 
 $gettingStarted = [
     ['How can I help my student with the search?', '<p>Help set a realistic total budget, review listings together, and read the lease before anyone signs. Your student can share listing links from HomeSC with you. No account is needed to view them.</p>'],
-    ['Can I use HomeSC myself?', '<p>Yes. Anyone can search, view listings and read reviews. Saving homes and writing reviews are limited to verified USC students, so reviews come only from students who have lived or toured there.</p>'],
+    ['Can I use HomeSC myself?', '<p>Yes. Anyone can search, view listings and read reviews. An account is needed to save homes and write reviews.</p>'],
     ['When should my student start looking?', '<p>Most students begin during the fall semester for the following school year, because popular buildings and houses near campus fill early. There are still homes available in spring and summer, but with fewer choices.</p>'],
     ['Is HomeSC affiliated with USC?', '<p>No. HomeSC is a student-built project and not an official USC service. USC’s own resources, including Off-Campus Housing 101 and Student Basic Needs, are listed on our <a class="text-link" href="resources.php#usc">resources page</a>.</p>'],
 ];

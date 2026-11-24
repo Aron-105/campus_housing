@@ -348,8 +348,11 @@ function icon($name) {
         <nav class="main-nav" id="main-nav" aria-label="Main navigation">
             <a href="index.php" aria-current="page">Home</a>
             <a href="results.php">Browse Listings</a>
-            <a href="page.php?section=post-listing">Post Listing</a>
-            <a href="page.php?section=about">About</a>
+            <a href="students.php">Students</a>
+            <a href="parents.php">Parents</a>
+            <a href="resources.php">Resources</a>
+            <a href="reviews.php">Reviews</a>
+            <a href="about.php">About</a>
         </nav>
         <a class="button login-button" href="login.php"><?= $userId ? 'Account' : 'Log In' ?></a>
         <button class="menu-button" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
@@ -456,8 +459,8 @@ function icon($name) {
     <div class="wrap">
         <div class="footer-top">
             <div class="footer-brand"><a class="brand" href="index.php" aria-label="HomeSC home"><img src="assets/logo-footer.png" width="110" height="34" alt="HomeSC"></a><p>Your place near campus starts here.</p></div>
-            <div class="footer-column"><h2>Explore</h2><ul><li><a href="results.php">Browse listings</a></li><li><a href="page.php?section=neighborhoods">Neighborhoods</a></li><li><a href="page.php?section=how-it-works">How it works</a></li></ul></div>
-            <div class="footer-column"><h2>Students</h2><ul><li><a href="page.php?section=housing-guide">Housing guide</a></li><li><a href="page.php?section=safety">Safety tips</a></li><li><a href="page.php?section=help">Help center</a></li></ul></div>
+            <div class="footer-column"><h2>Explore</h2><ul><li><a href="results.php">Browse listings</a></li><li><a href="search.php">Search</a></li><li><a href="reviews.php">Student reviews</a></li><li><a href="about.php">About HomeSC</a></li></ul></div>
+            <div class="footer-column"><h2>Guides</h2><ul><li><a href="students.php">For students</a></li><li><a href="parents.php">For parents</a></li><li><a href="resources.php#neighborhoods">Neighborhoods</a></li><li><a href="resources.php#safety">Safety tips</a></li></ul></div>
             <div class="footer-column"><h2>Ready to find your place?</h2><a class="button footer-cta" href="#home-search">Start searching <?= icon('arrow') ?></a></div>
         </div>
         <div class="footer-bottom"><p>© <?= date('Y') ?> HomeSC</p><p>Made for students in Los Angeles.</p><p><a href="page.php?section=privacy">Privacy</a> · <a href="page.php?section=terms">Terms</a></p></div>

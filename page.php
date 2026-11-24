@@ -12,6 +12,13 @@ $pages = [
     'terms'=>['Terms','The details, clearly laid out.','Our terms will be added before accounts become available.'],
 ];
 $section = request_text($_GET, 'section', 'about');
+// Sections that now have their own pages.
+$moved = [
+    'about'=>'about.php', 'how-it-works'=>'students.php', 'help'=>'students.php',
+    'neighborhoods'=>'resources.php#neighborhoods', 'housing-guide'=>'resources.php#guide',
+    'safety'=>'resources.php#safety',
+];
+if (isset($moved[$section])) { header('Location: ' . $moved[$section], true, 301); exit; }
 if (!isset($pages[$section])) { http_response_code(404); $pages[$section] = ['Page not found','Let’s find your way home.','The page you requested is not available.']; }
 [$eyebrow, $title, $description] = $pages[$section];
 require __DIR__ . '/placeholder.php';

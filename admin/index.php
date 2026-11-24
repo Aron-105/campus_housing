@@ -30,4 +30,24 @@ include 'header.php';
     </a>
 </div>
 
+<h2>Housing management</h2>
+<div class="cards">
+    <a class="card" href="properties.php">
+        <h2>Properties</h2>
+        <p>Add, edit, or delete housing properties.</p>
+    </a>
+    <a class="card" href="units.php">
+        <h2>Units</h2>
+        <p>Manage the units associated with each property.</p>
+    </a>
+    <a class="card" href="photos.php">
+        <h2>Photos</h2>
+        <p>Manage property and unit images and captions.</p>
+    </a>
+    <a class="card" href="edit-listing.php?task=amenities">
+        <h2>Amenities</h2>
+        <p>Choose a listing to update its unit amenities.</p>
+    </a>
+</div>
+
 <?php include 'footer.php'; ?>

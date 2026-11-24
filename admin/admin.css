@@ -96,10 +96,12 @@ h1 {
 
 .admin-nav .container {
     display: flex;
-    gap: 30px;
+    gap: 20px;
+    overflow-x: auto;
 }
 
 .admin-nav a {
+    white-space: nowrap;
     padding: 16px 0;
     color: #5f6764;
     font-weight: 700;
@@ -270,6 +272,55 @@ textarea:focus {
     font-weight: 400;
 }
 
+.housing-form {
+    max-width: 720px;
+}
+
+.admin-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.amenity-fields {
+    margin: 20px 0;
+    min-width: 0;
+}
+
+.amenity-options:not([hidden]),
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 12px;
+}
+
+.amenity-options label {
+    margin: 0;
+}
+
+.photo-editor {
+    padding: 16px;
+    border: 1px solid #b9b2a7;
+    background: #fff;
+}
+
+.photo-editor img {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+}
+
+.photo-path {
+    overflow-wrap: anywhere;
+}
+
+.housing-table td:last-child a + a {
+    margin-left: 8px;
+}
+
 .search-bar {
     display: flex;
     gap: 10px;
@@ -380,8 +431,8 @@ textarea:focus {
 
     .admin-table th:nth-child(2),
     .admin-table td:nth-child(2),
-    .admin-table th:nth-child(4),
-    .admin-table td:nth-child(4) {
+    .admin-table:not(.housing-table) th:nth-child(4),
+    .admin-table:not(.housing-table) td:nth-child(4) {
         display: none;
     }
 

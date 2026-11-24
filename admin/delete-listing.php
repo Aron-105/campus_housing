@@ -3,7 +3,6 @@ require __DIR__ . '/common.php';
 $title = 'Delete Listing'; $id = filter_var($_GET['id'] ?? null, FILTER_VALIDATE_INT, ['options'=>['min_range'=>1]]); $listing = $id ? admin_listing($db, $id) : null; $error = '';
 if ($id && !$listing) { http_response_code(404); }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $listing) {
-    admin_csrf();
     try { $stmt=$db->prepare('DELETE FROM listings WHERE listing_id = ?'); $stmt->bind_param('i', $id); $stmt->execute(); $stmt->close(); header('Location: delete-listing.php?deleted=1', true, 303); exit; }
     catch (mysqli_sql_exception $e) { error_log('Delete listing: '.$e->getMessage()); $error = (int)$e->getCode() === 1451 ? 'This listing has related records and cannot be deleted until they are handled.' : 'Could not delete this listing.'; }
 }

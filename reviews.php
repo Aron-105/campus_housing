@@ -1,68 +1,43 @@
 <?php
 require __DIR__ . '/bootstrap.php';
-require __DIR__ . '/browse_data.php';
 require __DIR__ . '/includes/layout.php';
 $pageTitle = 'Reviews';
 $pageDescription = 'Reviews of homes near USC.';
 $currentPage = 'reviews.php';
 
-$reviews = [];
-$errorMessage = '';
-try {
-    $db = browse_database();
-    $reviews = $db->query("SELECT r.overall_rating, r.body, r.review_date,
-            h.property_id, h.listing_id, h.property_name, h.neighborhood
-        FROM reviews r
-        JOIN vw_housing_overview h ON h.property_id = r.property_id
-            AND h.listing_id = (
-                SELECT MAX(public_home.listing_id)
-                FROM vw_housing_overview public_home
-                WHERE public_home.property_id = r.property_id
-            )
-        WHERE r.status = 'published'
-        ORDER BY r.review_date DESC, r.review_id DESC")->fetch_all(MYSQLI_ASSOC);
-} catch (Throwable $e) {
-    error_log('Reviews page: ' . $e->getMessage());
-    http_response_code(503);
-    $errorMessage = 'Reviews are temporarily unavailable. Please try again later.';
-}
+// PLACEHOLDER: sample reviews to show the layout. In the final build these
+// will come from the reviews table in the HomeSC database.
+$reviews = [
+    [5, 'Sample 4-bedroom house', 'North University Park', 'Five-minute walk to class and plenty of space for four of us. The landlord fixed our water heater within a day.', 'Verified USC student, senior', 'Oct 2026'],
+    [4, 'Sample studio apartment', 'Figueroa Corridor', 'The gym and study rooms are great and it’s fully furnished. Rent is on the higher side and the fees add up.', 'Verified USC student, junior', 'Sep 2026'],
+    [4, 'Sample 2-bedroom apartment', 'Exposition Park', 'Right by the Metro, and the park is perfect for morning runs. Game days get loud and parking is tough.', 'Verified USC student, graduate student', 'Aug 2026'],
+    [3, 'Sample 3-bedroom house', 'West Adams', 'Big rooms and a quiet street for the price. I bike to campus, but I wouldn’t want to walk home late.', 'Verified USC student, senior', 'Jun 2026'],
+    [5, 'Sample 1-bedroom apartment', 'Downtown LA (South Park)', 'I love living downtown and the E Line gets me to campus easily. Worth it if you have an internship nearby.', 'Verified USC student, graduate student', 'May 2026'],
+    [4, 'Sample private room', 'Koreatown', 'Affordable and the food nearby is amazing. The bus ride takes a while, so plan ahead for early classes.', 'Verified USC student, sophomore', 'Apr 2026'],
+];
 
 site_header();
+?>
+<div class="notice-banner" role="note">
+    <div class="wrap"><p><strong>Placeholder content.</strong> The reviews below are sample cards to show the layout and will be replaced with real student reviews from the HomeSC database in the final build.</p></div>
+</div>
+<?php
 page_hero('Student reviews', 'Hear it from<br><em>the people who lived there.</em>',
     'Read about homes near campus before you sign.');
 ?>
 <section class="section">
     <div class="wrap">
-        <?php if ($errorMessage) { ?>
-        <p role="status"><?= escape($errorMessage) ?></p>
-        <?php } elseif (!$reviews) { ?>
-        <p>No reviews have been published yet.</p>
-        <?php } else { ?>
         <div class="card-grid">
-            <?php foreach ($reviews as $review) {
-                $rating = $review['overall_rating'];
-                $wholeStars = filter_var($rating, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 5]]);
-                $listingUrl = 'details.php?property_id=' . (int)$review['property_id']
-                    . '&listing_id=' . (int)$review['listing_id'] . '#reviews';
-            ?>
+            <?php foreach ($reviews as [$rating, $property, $area, $text, $reviewer, $date]) { ?>
             <article class="card review-card">
-                <?php if ($wholeStars !== false) { ?>
-                <p class="stars" aria-label="<?= $wholeStars ?> out of 5 stars"><?= str_repeat('★', $wholeStars) ?><span><?= str_repeat('★', 5 - $wholeStars) ?></span></p>
-                <?php } else { ?>
-                <p class="stars"><?= isset($rating) ? escape($rating) . ' / 5' : 'Unrated' ?></p>
-                <?php } ?>
-                <h3><a href="<?= escape($listingUrl) ?>"><?= escape($review['property_name'] ?: 'Home near USC') ?></a></h3>
-                <?php if (!empty($review['neighborhood'])) { ?>
-                <p class="review-area"><?= escape($review['neighborhood']) ?></p>
-                <?php } ?>
-                <?php if (trim($review['body'] ?? '') !== '') { ?>
-                <blockquote><?= nl2br(escape($review['body'])) ?></blockquote>
-                <?php } ?>
-                <p class="review-meta"><?= escape($review['review_date'] ?: 'Date unavailable') ?></p>
+                <p class="stars" aria-label="<?= $rating ?> out of 5 stars"><?= str_repeat('★', $rating) ?><span><?= str_repeat('★', 5 - $rating) ?></span></p>
+                <h3><?= escape($property) ?></h3>
+                <p class="review-area"><?= escape($area) ?></p>
+                <blockquote><?= escape($text) ?></blockquote>
+                <p class="review-meta"><?= escape($reviewer) ?> · <?= escape($date) ?></p>
             </article>
             <?php } ?>
         </div>
-        <?php } ?>
     </div>
 </section>
 

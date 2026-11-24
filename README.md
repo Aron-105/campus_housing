@@ -29,3 +29,14 @@ Users can register and log in with an email address and password. Passwords are 
 Back up the database, then apply `schema.sql` once to add the administrator flag. Create an account through the site, and have a database administrator set `is_admin = 1` for that account. The application database user needs access to `users`, `listings`, the related property, unit and lookup tables, `reviews`, and `saved_properties`. Use HTTPS on a deployed site. The admin dashboard is at `/admin/`. Listing creation uses an existing property unit; creating properties and units is future work. Deleting a listing leaves its property and unit intact and is blocked if dependent records exist. Only listings for published properties appear in the public overview.
 
 The map reads `properties.latitude` and `properties.longitude`; properties without verified coordinates remain in the listing results but have no pin. The map uses OpenFreeMap Positron and does not require an API key. No automated scraper or sync is installed.
+
+## Local admin preview
+
+Set `'admin_preview' => true` in your local `config.php`, then start PHP's built-in development server on loopback. In PowerShell:
+
+```powershell
+$env:HOMESC_ENV = 'development'
+php -S 127.0.0.1:8000
+```
+
+Open `http://127.0.0.1:8000/admin/`. The preview uses the configured database and grants read-only access to the admin pages without signing in. Set `admin_preview` back to `false` to use normal administrator sign-in on the local server.

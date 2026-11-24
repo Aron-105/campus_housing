@@ -31,3 +31,6 @@ $page = basename($_SERVER['PHP_SELF']);
 </nav>
 
 <main class="container">
+<?php if ($adminPreview) { ?>
+    <p role="status">Local admin preview. Listing changes are disabled.</p>
+<?php } ?>

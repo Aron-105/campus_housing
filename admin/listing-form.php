@@ -15,4 +15,4 @@ function field($listing, $key) { return escape((string)($listing[$key] ?? '')); 
 <label for="available_from">Available from</label><input id="available_from" name="available_from" type="date" value="<?= field($listing, 'available_from') ?>">
 <label for="available_until">Available until</label><input id="available_until" name="available_until" type="date" value="<?= field($listing, 'available_until') ?>">
 <label for="listing_url">Original listing link</label><input id="listing_url" name="listing_url" type="url" maxlength="500" value="<?= field($listing, 'listing_url') ?>">
-<button type="submit" class="btn"><?= escape($buttonText) ?></button> <a class="btn btn-outline" href="index.php">Cancel</a></form>
+<button type="submit" class="btn"<?= $adminPreview ? ' disabled' : '' ?>><?= escape($buttonText) ?></button> <a class="btn btn-outline" href="index.php">Cancel</a></form>

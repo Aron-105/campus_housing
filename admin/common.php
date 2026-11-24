@@ -1,13 +1,39 @@
 <?php
 require_once __DIR__ . '/../bootstrap.php';
 require_once __DIR__ . '/../browse_data.php';
-if (!$userId) { header('Location: ../login.php', true, 303); exit; }
+
+function admin_preview_enabled(): bool {
+    if (PHP_SAPI !== 'cli-server' || getenv('HOMESC_ENV', true) !== 'development') {
+        return false;
+    }
+
+    $loopbackHosts = ['localhost', '127.0.0.1', '::1'];
+    if (!in_array($_SERVER['SERVER_NAME'] ?? '', $loopbackHosts, true)
+        || !in_array($_SERVER['REMOTE_ADDR'] ?? '', ['127.0.0.1', '::1'], true)
+        || !preg_match('/\A(?:localhost|127\.0\.0\.1|\[::1\])(?::[0-9]+)?\z/i', $_SERVER['HTTP_HOST'] ?? '')) {
+        return false;
+    }
+
+    $configPath = __DIR__ . '/../config.php';
+    $config = is_file($configPath) ? require $configPath : [];
+    return ($config['admin_preview'] ?? false) === true;
+}
+
+$adminPreview = admin_preview_enabled();
+if ($adminPreview && !in_array($_SERVER['REQUEST_METHOD'] ?? '', ['GET', 'HEAD'], true)) {
+    header('Allow: GET, HEAD');
+    http_response_code(405);
+    exit('Admin preview is read-only.');
+}
+if (!$adminPreview && !$userId) { header('Location: ../login.php', true, 303); exit; }
 try {
     $db = browse_database();
-    $check = $db->prepare('SELECT is_admin FROM users WHERE user_id = ?');
-    $check->bind_param('i', $userId); $check->execute(); $check->bind_result($isAdmin);
-    $allowed = $check->fetch() && (int)$isAdmin === 1; $check->close();
-    if (!$allowed) { http_response_code(403); exit('Administrator access required.'); }
+    if (!$adminPreview) {
+        $check = $db->prepare('SELECT is_admin FROM users WHERE user_id = ?');
+        $check->bind_param('i', $userId); $check->execute(); $check->bind_result($isAdmin);
+        $allowed = $check->fetch() && (int)$isAdmin === 1; $check->close();
+        if (!$allowed) { http_response_code(403); exit('Administrator access required.'); }
+    }
 } catch (Throwable $e) { error_log('Admin access: ' . $e->getMessage()); http_response_code(503); exit('Admin service is unavailable.'); }
 function admin_csrf() {
     global $csrfToken;
